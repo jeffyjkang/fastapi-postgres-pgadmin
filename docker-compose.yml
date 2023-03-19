@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+    - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+    - 5432:5432
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+    - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+    - 5050:80
+    depends_on:
+    - db
+  server:
+    build: server/
+    ports:
+    - 8000:8000
+    depends_on:
+      - db
+    links:
+    - db:db
