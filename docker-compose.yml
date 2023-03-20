@@ -25,6 +25,9 @@ services:
     - db
   server:
     build: server/
+    restart: always
+    volumes:
+      - ./server:/server
     ports:
     - 8000:8000
     depends_on:
