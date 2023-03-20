@@ -1,0 +1,4 @@
+generate migrations:
+alembic revision --autogenerate
+run migrations to db (make sure api is connected to db):
+alembic upgrade head

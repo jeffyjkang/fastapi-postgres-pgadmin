@@ -4,13 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import dotenv_values
 
 config = dict(dotenv_values(".env"))
-user = config.USER
-password = config.PASSWORD
-server = config.SERVER
-db = config.DB
+
+user = config.get('USER')
+password = config.get('PASSWORD')
+server = config.get('SERVER')
+db = config.get('DB')
 
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
-SQLALCHEMY_DATABASE_URL = f"postgresql://${user}:{password}@{server}/{db}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{user}:{password}@{server}/{db}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, future=True
