@@ -11,7 +11,7 @@ server = config.get('SERVER')
 db = config.get('DB')
 
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
-SQLALCHEMY_DATABASE_URL = f"postgresql://{user}:{password}@{server}/{db}"
+SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg2://{user}:{password}@{server}/{db}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, future=True
